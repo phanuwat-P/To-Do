@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background: #f1f5f9;
+  color: #1e293b;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Todo row enter / leave animation */
+.todo-row {
+  display: grid;
+  grid-template-rows: 1fr;
+  padding-bottom: 10px;
+  animation: todo-enter 0.25s ease;
+  transition: grid-template-rows 0.28s ease, padding 0.28s ease, opacity 0.25s ease, transform 0.28s ease;
+}
+.todo-row > div {
+  min-height: 0;
+  overflow: hidden;
+  padding: 4px 4px 6px;
+  margin: -4px -4px -6px;
+}
+.todo-row.leaving {
+  grid-template-rows: 0fr;
+  padding-bottom: 0;
+  opacity: 0;
+  transform: translateX(32px);
+}
+
+@keyframes todo-enter {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .todo-row, .todo-row.leaving { transition: none; animation: none; }
+}
